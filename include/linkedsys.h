@@ -25,3 +25,4 @@ FError has_next(LList *list);
 FError goto_prev(LList *list);
 FError has_prev(LList *list);
 FError goto_index(LList *list, int index);
+FError print_cur_node(LList *list, bool printData);

@@ -154,3 +154,16 @@ FError goto_index(LList *list, int index) {
 
     return FSUCCESS;
 }
+
+FError print_cur_node(LList *list, bool printData) {
+    if (!list || !list->current) {return FFAILURE;}
+    Node *cNode = list->current;
+    printf("Index: %d; cNodePTR: %p; cDataPTR: %p; cNextPTR: %p; cPrevPTR: %p\n", list->curIndex, cNode, cNode->data, cNode->next, cNode->prev);
+    if (printData) {
+        if (!cNode->data) {return FFAILURE;}
+        Data *cData = cNode->data;
+        printf("cdMoney: %d; cdItems: %d; cdDebt: %d\n", cData->money, cData->items, cData->debt);
+    }
+
+    return FSUCCESS;
+}
