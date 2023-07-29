@@ -3,7 +3,7 @@
 #include "gen_utils.h"
 
 Node *create_node(Data *data) {
-    if (!data) {return FFAILURE;}
+    if (!data) {return NULL;}
     Node *nNode = smalloc(sizeof(Node));
 
     nNode->data = data;
