@@ -4,6 +4,7 @@
 #include "ferror.h"
 
 typedef struct SLList {
+    int length;
     Node *current;
     Node *head;
     Node *tail;

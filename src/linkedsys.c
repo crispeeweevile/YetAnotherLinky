@@ -5,6 +5,7 @@ LList *create_llist(Node *node) {
     if (!node) {return NULL;}
     LList *nList = smalloc(sizeof(LList));
 
+    nList->length = 1;
     nList->current = node;
     nList->head = node;
     nList->tail = node;
@@ -41,6 +42,7 @@ FError insert_at_tail(LList *list, Node *node) {
     node->prev = list->tail;
     list->tail = node;
 
+    list->length++;
     return FSUCCESS;
 }
 
@@ -57,7 +59,7 @@ Node *remove_tail(LList *list) {
     list->tail = tailPrev;
     tailPrev->next = NULL;
     tail->prev = NULL;
-
+    list->length--;
     return tail;
 }
 
