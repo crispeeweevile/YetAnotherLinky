@@ -13,17 +13,17 @@ int main(int arc, char *arv[]) {
         printf("went back\n");
         print_node(tList->current, true);
         printf("insert a 'ton'\n");
-        insert_at_tail(tList, create_node(create_data(4, 5, 6))); // 2
-        insert_at_tail(tList, create_node(create_data(7, 8, 9))); // 3
+        insert_at_tail(tList, create_node(create_data(4, 5, 6)));    // 2
+        insert_at_tail(tList, create_node(create_data(7, 8, 9)));    // 3
         insert_at_tail(tList, create_node(create_data(10, 11, 12))); // 4
         insert_at_tail(tList, create_node(create_data(13, 14, 15))); // 5
         insert_at_tail(tList, create_node(create_data(16, 17, 18))); // 6
         insert_at_tail(tList, create_node(create_data(19, 20, 21))); // 7
         insert_at_tail(tList, create_node(create_data(22, 23, 24))); // 8
-        insert_at_tail(tList, create_node(create_data(25, 26, 27)));// 9
-        insert_at_tail(tList, create_node(create_data(28, 29, 30)));// 10
-        insert_at_tail(tList, create_node(create_data(31, 32, 33)));// 11
-        insert_at_tail(tList, create_node(create_data(34, 35, 36)));// 12
+        insert_at_tail(tList, create_node(create_data(25, 26, 27))); // 9
+        insert_at_tail(tList, create_node(create_data(28, 29, 30))); // 10
+        insert_at_tail(tList, create_node(create_data(31, 32, 33))); // 11
+        insert_at_tail(tList, create_node(create_data(34, 35, 36))); // 12
         FError err = goto_index(tList, 12);
         if (err != FSUCCESS) {
             printf("we screwed\n");
