@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "linkedsys.h"
 #include "gen_utils.h"
 
@@ -6,6 +7,7 @@ LList *create_llist(Node *node) {
     LList *nList = smalloc(sizeof(LList));
 
     nList->length = 1;
+    nList->curIndex = 0;
     nList->current = node;
     nList->head = node;
     nList->tail = node;
@@ -69,6 +71,7 @@ FError goto_next(LList *list) {
     if (!list->current->next) {return FFAILURE;}
     Node *next = list->current->next;
     list->current = next;
+    list->curIndex++;
 
     return FSUCCESS;
 }
@@ -84,6 +87,7 @@ FError goto_prev(LList *list) {
     if (!list->current->prev) {return FFAILURE;}
     Node *prev = list->current->prev;
     list->current = prev;
+    list->curIndex--;
 
     return FSUCCESS;
 }
@@ -91,5 +95,30 @@ FError goto_prev(LList *list) {
 FError has_prev(LList *list) {
     if (!list || !list->current) {return FFAILURE;}
     if (!list->current->prev) {return FFAILURE;}
+    return FSUCCESS;
+}
+
+FError goto_index(LList *list, int index) {
+    if (!list || !list->current) {return FFAILURE;}
+    // removed because you could be at head or tail (not cause for failure)
+    //if (!list->current->next) {return FFAILURE;}
+    //if (!list->current->prev) {return FFAILURE;}
+    Node *curNode = list->current;
+
+    if (list->curIndex != index) {
+        while (curNode->next && list->curIndex < index) {
+            FError err = goto_next(list);
+            if (err != FSUCCESS) {return FFAILURE;}
+            curNode = list->current;
+        }
+        while (curNode->prev && list->curIndex > index) {
+            FError err = goto_prev(list);
+            if (err != FSUCCESS) {return FFAILURE;}
+            curNode = list->current;
+        }
+        
+        if (list->curIndex != index) {return FFAILURE;}
+    }
+
     return FSUCCESS;
 }

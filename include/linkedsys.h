@@ -5,6 +5,7 @@
 
 typedef struct SLList {
     int length;
+    int curIndex;
     Node *current;
     Node *head;
     Node *tail;
@@ -19,3 +20,4 @@ FError goto_next(LList *list);
 FError has_next(LList *list);
 FError goto_prev(LList *list);
 FError has_prev(LList *list);
+FError goto_index(LList *list, int index);
