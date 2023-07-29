@@ -3,6 +3,7 @@
 #include "gen_utils.h"
 
 LList *create_llist(Node *node) {
+    // still need to handle non-singular nodes
     if (!node) {return NULL;}
     LList *nList = smalloc(sizeof(LList));
 
@@ -132,9 +133,6 @@ FError has_prev(LList *list) {
 
 FError goto_index(LList *list, int index) {
     if (!list || !list->current) {return FFAILURE;}
-    // removed because you could be at head or tail (not cause for failure)
-    //if (!list->current->next) {return FFAILURE;}
-    //if (!list->current->prev) {return FFAILURE;}
     Node *curNode = list->current;
 
     if (list->curIndex != index) {
