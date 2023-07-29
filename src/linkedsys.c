@@ -3,6 +3,7 @@
 #include "gen_utils.h"
 
 LList *create_llist(Node *node) {
+    // still need to handle non-singular nodes
     if (!node) {return NULL;}
     LList *nList = smalloc(sizeof(LList));
 
@@ -48,14 +49,28 @@ FError insert_at_tail(LList *list, Node *node) {
     return FSUCCESS;
 }
 
+FError insert_at_head(LList *list, Node *node) {
+    if (!list || !node) {return FFAILURE;}
+    if (list->head->prev) {return FFAILURE;}
+
+    list->head->prev = node;
+    node->next = list->head;
+    list->head = node;
+
+    list->curIndex++;
+    list->length++;
+    return FFAILURE;
+}
+
 Node *remove_tail(LList *list) {
     if (!list || !list->tail) {return NULL;}
     Node *tail = list->tail;
     if (!tail->prev) {return NULL;}
     Node *tailPrev = tail->prev;
 
-    if (tail == list->current) {
+    if (list->current == tail) {
         list->current = tailPrev;
+        list->curIndex--;
     }
 
     list->tail = tailPrev;
@@ -65,6 +80,24 @@ Node *remove_tail(LList *list) {
     return tail;
 }
 
+Node *remove_head(LList *list) {
+    if (!list || !list->head) {return NULL;}
+    Node *head = list->head;
+    if (!head->next) {return NULL;}
+    Node *headNext = head->next;
+
+    if (list->current == head) {
+        list->current = headNext;
+        list->curIndex++;
+    }
+
+    list->head = headNext;
+    headNext->prev = NULL;
+    head->next = NULL;
+    list->curIndex--;
+    list->length--;
+    return head;
+}
 
 FError goto_next(LList *list) {
     if (!list || !list->current) {return FFAILURE;}
@@ -100,9 +133,6 @@ FError has_prev(LList *list) {
 
 FError goto_index(LList *list, int index) {
     if (!list || !list->current) {return FFAILURE;}
-    // removed because you could be at head or tail (not cause for failure)
-    //if (!list->current->next) {return FFAILURE;}
-    //if (!list->current->prev) {return FFAILURE;}
     Node *curNode = list->current;
 
     if (list->curIndex != index) {
@@ -118,6 +148,19 @@ FError goto_index(LList *list, int index) {
         }
         
         if (list->curIndex != index) {return FFAILURE;}
+    }
+
+    return FSUCCESS;
+}
+
+FError print_cur_node(LList *list, bool printData) {
+    if (!list || !list->current) {return FFAILURE;}
+    Node *cNode = list->current;
+    printf("Index: %d; cNodePTR: %p; cDataPTR: %p; cNextPTR: %p; cPrevPTR: %p\n", list->curIndex, cNode, cNode->data, cNode->next, cNode->prev);
+    if (printData) {
+        if (!cNode->data) {return FFAILURE;}
+        Data *cData = cNode->data;
+        printf("cdMoney: %d; cdItems: %d; cdDebt: %d\n", cData->money, cData->items, cData->debt);
     }
 
     return FSUCCESS;

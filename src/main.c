@@ -4,14 +4,14 @@
 int main(int arc, char *arv[]) {
     {
         LList *tList = create_llist(create_node(create_data(1, 2, 3))); // 0
-        print_node(tList->current, true);
+        print_cur_node(tList, true);
         insert_at_tail(tList, create_node(create_data(4, 5, 6))); // 1
         goto_next(tList);
         printf("went forth\n");
-        print_node(tList->current, true);
+        print_cur_node(tList, true);
         goto_prev(tList);
         printf("went back\n");
-        print_node(tList->current, true);
+        print_cur_node(tList, true);
         printf("insert a 'ton'\n");
         insert_at_tail(tList, create_node(create_data(4, 5, 6)));    // 2
         insert_at_tail(tList, create_node(create_data(7, 8, 9)));    // 3
@@ -28,13 +28,22 @@ int main(int arc, char *arv[]) {
         if (err != FSUCCESS) {
             printf("we screwed\n");
         }
-        printf("went to i12\n");
-        print_node(tList->current, true);
+        print_cur_node(tList, true);
+
+        insert_at_head(tList, create_node(create_data(-2, -1, 0)));
+        err = goto_index(tList, 0);
+        if (err != FSUCCESS) {
+            printf("we screwed\n");
+        }
+        print_cur_node(tList, true);
+
         printf("freeing\n");
         if (free_llist(tList, true) != FSUCCESS) {
             printf("free list failed!!!!\n");
             return 1;
         } else {tList = NULL;}
+
+        printf("Finished program. . .\n");
     }
 
     return 0;
