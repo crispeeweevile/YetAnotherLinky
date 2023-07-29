@@ -25,6 +25,7 @@ FError free_node(Node *node, bool bFreeData) {
     node->data = NULL;
     node->next = NULL;
     node->prev = NULL;
+    free(node);
 
     return FSUCCESS;
 }
