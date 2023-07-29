@@ -30,7 +30,7 @@ int main(int arc, char *arv[]) {
         }
         print_cur_node(tList, true);
 
-        insert_at_head(tList, create_node(create_data(-2, -1, 0)));
+        insert_at_head(tList, create_node(create_data(-2, -1, 0)));     // all previous indices +1
         err = goto_index(tList, 0);
         if (err != FSUCCESS) {
             printf("ooooof\n");
