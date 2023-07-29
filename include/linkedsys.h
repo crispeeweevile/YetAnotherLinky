@@ -5,6 +5,8 @@
 
 typedef struct SLList {
     int length;
+    // current implementation of indices is subject to bugs
+    // be careful, and watch out for them. . .
     int curIndex;
     Node *current;
     Node *head;
