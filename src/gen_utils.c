@@ -5,7 +5,7 @@ void *smalloc(size_t size) {
     void *nPtr = malloc(size);
     if (!nPtr) {
         fprintf(stderr, "Failed to allocate: %zu bytes\n", size);
-        (*nPtr);
+        abort();
     }
 
     return nPtr;
