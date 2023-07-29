@@ -13,7 +13,25 @@ LList *create_llist(Node *node) {
 }
 
 FError free_llist(LList *list, bool bFreeData) {
-    return FFAILURE;
+    if (!list) {return FFAILURE;}
+    while (list->tail->prev) {
+        Node *nRemove = remove_tail(list);
+        if (nRemove) {
+            if (free_node(nRemove, bFreeData) != FSUCCESS) {return FFAILURE;}
+            nRemove = NULL;
+        } else {break;}
+    }
+    
+    if ((list->tail == list->head) && (list->head == list->current)) {
+        if(free_node(list->current, bFreeData) != FSUCCESS) {return FFAILURE;}
+        list->tail = NULL;
+        list->current = NULL;
+        list->head = NULL;
+    } else {return FFAILURE;}
+
+    free(list);
+
+    return FSUCCESS;
 }
 
 FError insert_at_tail(LList *list, Node *node) {
