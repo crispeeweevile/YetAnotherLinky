@@ -11,3 +11,4 @@ typedef struct SNode {
 
 Node *create_node(Data *data);
 FError free_node(Node *node, bool bFreeData);
+FError print_node(Node *node);

@@ -28,3 +28,15 @@ FError free_node(Node *node, bool bFreeData) {
 
     return FSUCCESS;
 }
+
+FError print_node(Node *node, bool printData) {
+    if (!node) {return FFAILURE;}
+    printf("NodePTR: %p; DataPTR: %p; NextPTR: %p; PrevPTR: %p\n", node, node->data, node->next, node->prev);
+    if (printData) {
+        if (!node->data) {return FFAILURE;}
+        Data *data = node->data;
+        printf("DMoney: %d; DItems: %d; DDebt: %d\n", data->money, data->items, data->debt);
+    }
+
+    return FSUCCESS;
+}
