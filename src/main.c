@@ -35,8 +35,6 @@ int main(int arc, char *arv[]) {
             printf("free list failed!!!!\n");
             return 1;
         } else {tList = NULL;}
-        //printf("current: %p; head: %p; tail: %p\n", tList->current, tList->head, tList->tail);
-        //tList = NULL;
     }
 
     return 0;
