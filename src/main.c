@@ -26,14 +26,14 @@ int main(int arc, char *arv[]) {
         insert_at_tail(tList, create_node(create_data(34, 35, 36))); // 12
         FError err = goto_index(tList, 12);
         if (err != FSUCCESS) {
-            printf("we screwed\n");
+            printf("ooooof\n");
         }
         print_cur_node(tList, true);
 
         insert_at_head(tList, create_node(create_data(-2, -1, 0)));
         err = goto_index(tList, 0);
         if (err != FSUCCESS) {
-            printf("we screwed\n");
+            printf("ooooof\n");
         }
         print_cur_node(tList, true);
 
