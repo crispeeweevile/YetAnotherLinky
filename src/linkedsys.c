@@ -27,9 +27,9 @@ FError insert_at_tail(LList *list, Node *node) {
 }
 
 Node *remove_tail(LList *list) {
-    if (!list || !list->tail) {return FFAILURE;}
+    if (!list || !list->tail) {return NULL;}
     Node *tail = list->tail;
-    if (!tail->prev) {return FFAILURE;}
+    if (!tail->prev) {return NULL;}
     Node *tailPrev = tail->prev;
 
     if (tail == list->current) {
