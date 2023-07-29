@@ -48,14 +48,28 @@ FError insert_at_tail(LList *list, Node *node) {
     return FSUCCESS;
 }
 
+FError insert_at_head(LList *list, Node *node) {
+    if (!list || !node) {return FFAILURE;}
+    if (list->head->prev) {return FFAILURE;}
+
+    list->head->prev = node;
+    node->next = list->head;
+    list->head = node;
+
+    list->curIndex++;
+    list->length++;
+    return FFAILURE;
+}
+
 Node *remove_tail(LList *list) {
     if (!list || !list->tail) {return NULL;}
     Node *tail = list->tail;
     if (!tail->prev) {return NULL;}
     Node *tailPrev = tail->prev;
 
-    if (tail == list->current) {
+    if (list->current == tail) {
         list->current = tailPrev;
+        list->curIndex--;
     }
 
     list->tail = tailPrev;
@@ -65,6 +79,24 @@ Node *remove_tail(LList *list) {
     return tail;
 }
 
+Node *remove_head(LList *list) {
+    if (!list || !list->head) {return NULL;}
+    Node *head = list->head;
+    if (!head->next) {return NULL;}
+    Node *headNext = head->next;
+
+    if (list->current == head) {
+        list->current = headNext;
+        list->curIndex++;
+    }
+
+    list->head = headNext;
+    headNext->prev = NULL;
+    head->next = NULL;
+    list->curIndex--;
+    list->length--;
+    return head;
+}
 
 FError goto_next(LList *list) {
     if (!list || !list->current) {return FFAILURE;}
