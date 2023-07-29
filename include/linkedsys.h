@@ -16,3 +16,5 @@ Node *remove_tail(LList *list);
 
 FError goto_next(LList *list);
 FError has_next(LList *list);
+FError goto_prev(LList *list);
+FError has_prev(LList *list);

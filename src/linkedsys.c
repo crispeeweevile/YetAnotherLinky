@@ -76,3 +76,18 @@ FError has_next(LList *list) {
     if (!list->current->next) {return FFAILURE;}
     return FSUCCESS;
 }
+
+FError goto_prev(LList *list) {
+    if (!list || !list->current) {return FFAILURE;}
+    if (!list->current->prev) {return FFAILURE;}
+    Node *prev = list->current->prev;
+    list->current = prev;
+
+    return FSUCCESS;
+}
+
+FError has_prev(LList *list) {
+    if (!list || !list->current) {return FFAILURE;}
+    if (!list->current->prev) {return FFAILURE;}
+    return FSUCCESS;
+}
